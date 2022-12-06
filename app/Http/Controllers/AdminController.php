@@ -84,14 +84,24 @@ class AdminController extends Controller
         return redirect()->route('admin.index')->with('success', 'Data Admin berhasil diubah');
     }
 
-    public function delete($id)
-    {
-        // Soft Deletes
-        DB::update('update admin set deleted_at = :deleted_at where id_admin = :id_admin', [
-            "deleted_at" => date("Y-m-d H:i:s"),
-            'id_admin' => $id
-        ]);
-        // DB::delete('DELETE FROM admin WHERE id_admin = :id_admin', ['id_admin' => $id]);
+    // public function delete($id)
+    // {
+    //     // Soft Deletes
+    //     DB::update('update admin set deleted_at = :deleted_at where id_admin = :id_admin', [
+    //         "deleted_at" => date("Y-m-d H:i:s"),
+    //         'id_admin' => $id
+    //     ]);
+    //     // DB::delete('DELETE FROM admin WHERE id_admin = :id_admin', ['id_admin' => $id]);
+
+    //     return redirect()->route('admin.index')->with('success', 'Data Admin berhasil dihapus');
+    // }
+
+    public function delete($id) {
+        // Menggunakan Query Builder Laravel dan Named Bindings untuk valuesnya
+        DB::delete('DELETE FROM admin WHERE id_admin = :id_admin', ['id_admin' => $id]);
+
+        // Menggunakan laravel eloquent
+        // Admin::where('id_admin', $id)->delete();
 
         return redirect()->route('admin.index')->with('success', 'Data Admin berhasil dihapus');
     }

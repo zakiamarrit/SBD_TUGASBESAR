@@ -76,7 +76,7 @@ class UnitController extends Controller
     {
         // Soft Deletes
         DB::update('update unit_kerja set deleted_at = :deleted_at where id_unit_kerja = :id_unit_kerja', [
-            "deleted_at" => date("Y-m-d H:i:s"),
+            "deleleted_at" => date("Y-m-d H:i:s"),
             'id_unit_kerja' => $id
         ]);
         // Menggunakan Query Builder Laravel dan Named Bindings untuk valuesnya
